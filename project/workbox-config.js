@@ -1,8 +1,17 @@
 module.exports = {
   "globDirectory": "build/",
   "globPatterns": [
-    "**/*.{html,js,css}"
+    "**/*.css",
+    "index.html",
+    "js/animation.js",
+    "images/home/*.jpg",
+    "images/icon/*.svg",
+    "pages/offline.html",
+    "pages/404.html"
   ],
   "swDest": "build/sw.js",
-  "swSrc": "src/sw.js"
+  "swSrc": "src/sw.js",
+  "globIgnores": [
+      "../workbox-config.js"
+  ]
 };

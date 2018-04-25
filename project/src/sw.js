@@ -19,7 +19,69 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.0.0/workbox
 if (workbox) {
     console.log('Workbox is working');
 
+    // Set precache
     workbox.precaching.precacheAndRoute([]);
+
+    // Articles Images cache
+    workbox.routing.registerRoute(
+        // Define which files should be cached
+        /(.*)articles(.*)\.(?:png|gif|jpg)/,
+
+        // Define caching strategie
+        workbox.strategies.cacheFirst({
+            cacheName: 'images-cache',
+            plugins: [
+                new workbox.expiration.Plugin({
+                    maxEntries: 50,
+                    maxAgeSeconds: 30 * 24 * 60 * 60 //60 days
+                })
+            ]
+        })
+    );
+
+    // Icon cache
+    workbox.routing.registerRoute(
+        '/images/icon/*',
+        workbox.strategies.staleWhileRevalidate({
+            cacheName: 'icon-cache',
+            plugins: [
+                new workbox.expiration.Plugin({
+                    maxEntries: 5
+                })
+            ]
+        })
+    );
+
+    // Define artciles cache strategie in const
+    const articleHandler = workbox.strategies.networkFirst({
+        cacheName: 'articles-cache',
+        plugins: [
+            new workbox.expiration.Plugin({
+                maxEntries: 50
+            })
+        ]
+    })
+
+    // Register articles page cache
+    workbox.routing.registerRoute(
+        /(.*)article(.*)\.html/,
+        // Call startegie from const
+        args => {
+            return articleHandler.handle(args).then(response => {
+                // If there's no response return offline html
+                // If it returns a 404 return 404 html
+                // these pages are defined in the workbox-config.js precache
+                if (!response) {
+                    return caches.match('pages/offline.html');
+                } else if (response.status === 404) {
+                    return caches.match('pages/404.html');
+                }
+                return response;
+            });
+        }
+    )
+
+
 } else {
     console.log('Workbox not working');
 }
