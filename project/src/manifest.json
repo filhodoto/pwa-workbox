@@ -1,0 +1,43 @@
+{
+  "name": "Progressive Web App",
+  "short_name": "PWA - short name",
+  "description": "Progressive web app POC description",
+  "lang": "en",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2196F3",
+  "theme_color": "#2196F3",
+  "orientation": "any",
+  "icons": [
+    {
+     "src": "/images/pwa-icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+     "src": "/images/pwa-icons/icon-310x310.png",
+      "sizes": "310x310",
+      "type": "image/png"
+    },
+    {
+     "src": "/images/pwa-icons/icon-310x150.png",
+      "sizes": "310x150",
+      "type": "image/png"
+    },
+    {
+     "src": "/images/pwa-icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+     "src": "/images/pwa-icons/icon-150x150.png",
+      "sizes": "150x150",
+      "type": "image/png"
+    },
+    {
+     "src": "/images/pwa-icons/icon-70x70.png",
+      "sizes": "70x70",
+      "type": "image/png"
+    }
+  ]
+}
