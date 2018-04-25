@@ -3,9 +3,11 @@ module.exports = {
   "globPatterns": [
     "**/*.css",
     "index.html",
-    "js/animation.js",
+    "manifest.json",
+    "js/*.js",
     "images/home/*.jpg",
     "images/icon/*.svg",
+    "images/pwa-icons/*.png", // probably not be necessary to cache all
     "pages/offline.html",
     "pages/404.html"
   ],

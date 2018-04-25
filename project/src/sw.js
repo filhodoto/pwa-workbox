@@ -19,10 +19,14 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.0.0/workbox
 if (workbox) {
     console.log('Workbox is working');
 
-    // Set precache
+    /**
+     * Set precache
+     */
     workbox.precaching.precacheAndRoute([]);
 
-    // Articles Images cache
+    /**
+     * Articles Images cache
+     */
     workbox.routing.registerRoute(
         // Define which files should be cached
         /(.*)articles(.*)\.(?:png|gif|jpg)/,
@@ -39,7 +43,9 @@ if (workbox) {
         })
     );
 
-    // Icon cache
+    /**
+     * Icon cache
+     */
     workbox.routing.registerRoute(
         '/images/icon/*',
         workbox.strategies.staleWhileRevalidate({
@@ -52,7 +58,11 @@ if (workbox) {
         })
     );
 
-    // Define artciles cache strategie in const
+
+    /**
+     * Articles cache
+     */
+    // Define articles cache strategy in const
     const articleHandler = workbox.strategies.networkFirst({
         cacheName: 'articles-cache',
         plugins: [
@@ -81,6 +91,9 @@ if (workbox) {
         }
     )
 
+    /**
+     * Posts cache
+     */
     const postsHandler = workbox.strategies.cacheFirst({
         cacheName: 'posts-cache',
         plugins: [
@@ -105,6 +118,24 @@ if (workbox) {
             }).catch(function() { return caches.match('pages/offline.html')});
         }
     )
+
+
+    /**
+     * Api comments cache
+     * TODO:: find out to make sw cahce this response on first load.
+     */
+    workbox.routing.registerRoute(
+        new RegExp('^https://jsonplaceholder.typicode.com/comments'),
+        workbox.strategies.networkFirst({
+            cacheName: 'api-comments-cache',
+            plugins: [
+                new workbox.cacheableResponse.Plugin({
+                    statuses: [0, 200]
+                })
+            ]
+        })
+    )
+
 
 } else {
     console.log('Workbox not working');
