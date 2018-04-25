@@ -1,14 +1,7 @@
-# Workbox Lab
+# PWA poc
 
-In this codelab, you’ll use [Workbox](https://workboxjs.org/) to convert a web site into a Progressive Web App with offline functionality and fast performance. Workbox allows you to create production quality service workers that follow best practices and handle corner cases, making your development process simpler and your web app more reliable.
+Implementation of PWA based on Workbox Lab. Using [Workbox](https://workboxjs.org/) to convert a simple web site template into a Progressive Web App with offline functionality and fast performance.
 
-## Getting started
-
-Follow the [Google Codelabs instructions](https://codelabs.developers.google.com/codelabs/workbox-lab/index.html?index=..%2F..%2Findex#0).
-
-## Note
-
-All images are CCO
 
 ## More resources
 
