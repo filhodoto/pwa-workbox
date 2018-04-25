@@ -65,7 +65,7 @@ if (workbox) {
     // Register articles page cache
     workbox.routing.registerRoute(
         /(.*)article(.*)\.html/,
-        // Call startegie from const
+        // Call strategy from const
         args => {
             return articleHandler.handle(args).then(response => {
                 // If there's no response return offline html
@@ -81,6 +81,30 @@ if (workbox) {
         }
     )
 
+    const postsHandler = workbox.strategies.cacheFirst({
+        cacheName: 'posts-cache',
+        plugins: [
+            new workbox.expiration.Plugin({
+                maxEntries: 50
+            })
+        ]
+    });
+
+
+    // Register posts cache
+    workbox.routing.registerRoute(
+        /(.*)post(.*)\.html/,
+        args => {
+            // the handle method returns a promise
+            return postsHandler.handle(args).then(response => {
+                if(response.status === 404) {
+                    return caches.match('pages/404.html');
+                }
+                return response;
+
+            }).catch(function() { return caches.match('pages/offline.html')});
+        }
+    )
 
 } else {
     console.log('Workbox not working');
