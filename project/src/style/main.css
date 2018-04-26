@@ -45,6 +45,20 @@ ul.navbar > li > a {
   padding: 14px 16px;
 }
 
+.feedback {
+  display: flex;
+  width: 100%;
+  background-color: goldenrod;
+  color: #fff;
+  padding: 7px 15px;
+  font-size: 12px;
+  opacity: 0;
+}
+
+.feedback.show {
+    opacity: 1;
+}
+
 section {
   display: flex;
   flex-wrap: wrap;
