@@ -70,7 +70,7 @@ if (workbox) {
                 maxEntries: 50
             })
         ]
-    })
+    });
 
     // Register articles page cache
     workbox.routing.registerRoute(
@@ -117,7 +117,7 @@ if (workbox) {
 
             }).catch(function() { return caches.match('pages/offline.html')});
         }
-    )
+    );
 
 
     /**
@@ -125,9 +125,10 @@ if (workbox) {
      * TODO:: find out to make sw cahce this response on first load.
      */
     workbox.routing.registerRoute(
-        new RegExp('^https://jsonplaceholder.typicode.com/comments'),
+        // new RegExp('^https://jsonplaceholder.typicode.com/comments'),
+        new RegExp('^https://jsonplaceholder.typicode.com/'),
         workbox.strategies.networkFirst({
-            cacheName: 'api-comments-cache',
+            cacheName: 'api-cache',
             plugins: [
                 new workbox.cacheableResponse.Plugin({
                     statuses: [0, 200]

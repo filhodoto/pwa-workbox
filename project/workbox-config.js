@@ -4,7 +4,7 @@ module.exports = {
     "**/*.css",
     "index.html",
     "manifest.json",
-    "js/app.js",
+    "js/*.js",
     "images/home/*.jpg",
     "images/icon/*.svg",
     "images/pwa-icons/*.png", // probably not be necessary to cache all
