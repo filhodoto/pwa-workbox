@@ -24,6 +24,16 @@ if (workbox) {
      */
     workbox.precaching.precacheAndRoute([]);
 
+
+    /**
+    * Tell service workers to skip default lifecycle
+    * We're using it to cache api calls after first load, but this will affect all caches
+    * https://developers.google.com/web/tools/workbox/modules/workbox-sw#skip_waiting_and_clients_claim
+    */
+    workbox.skipWaiting();
+    workbox.clientsClaim();
+
+
     /**
      * Articles Images cache
      */
@@ -119,10 +129,8 @@ if (workbox) {
         }
     );
 
-
     /**
-     * Api comments cache
-     * TODO:: find out to make sw cahce this response on first load.
+     * Api calls cache
      */
     workbox.routing.registerRoute(
         // new RegExp('^https://jsonplaceholder.typicode.com/comments'),
@@ -134,9 +142,8 @@ if (workbox) {
                     statuses: [0, 200]
                 })
             ]
-        })
-    )
-
+        }),
+    );
 
 } else {
     console.log('Workbox not working');
