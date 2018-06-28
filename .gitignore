@@ -7,3 +7,4 @@ app.yal
 build/
 .idea/
 solution/
+yarn-error.log
